@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		D9DE0182305D21C400DC97B5 /* ASD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ASD.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D9DE0182305D21C400DC97B5 /* ASD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = ASD.app; path = "/Users/nazardydyn/Desktop/ASD/ASD/build/Debug-iphoneos/ASD.app"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -33,16 +33,7 @@
 			isa = PBXGroup;
 			children = (
 				D9DE0184305D21C400DC97B5 /* ASD */,
-				D9DE0183305D21C400DC97B5 /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		D9DE0183305D21C400DC97B5 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				D9DE0182305D21C400DC97B5 /* ASD.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -95,7 +86,7 @@
 			mainGroup = D9DE0179305D21C400DC97B5;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = D9DE0183305D21C400DC97B5 /* Products */;
+			productRefGroup = D9DE0179305D21C400DC97B5;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -269,12 +260,15 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.nazardydyn.ASD;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -301,12 +295,15 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.nazardydyn.ASD;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
