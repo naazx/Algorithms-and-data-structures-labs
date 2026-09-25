@@ -100,40 +100,30 @@ struct Lab2View: View {
     private func runSort() {
         errorMessage = nil
 
-        // 1. Кількість студентів
         guard let n = Int(countText), n > 0 else {
             errorMessage = "Введи коректну кількість студентів."
             return
         }
 
-        // 2–3. Список рівно на n студентів із псевдовипадковими даними
         let students = generateStudents(count: n)
         previewBefore = Array(students.prefix(previewLimit))
 
-        // Варіант: лишаємо тільки студентів із балом > 4
         var selected = studentsAbove4(students)
-
-        // 4. Час початку
+        
         let clock = ContinuousClock()
         let start = clock.now
 
-        // 5. Сортування за алфавітом
         quickSort(&selected, index: 0, index: selected.count - 1)
 
-        // 6. Час закінчення
         let elapsed = clock.now - start
 
-        // 7. Перевірка
         sortedResult = isSorted(selected)
 
-        // 8. Результат
         elapsedMs = Double(elapsed.components.seconds) * 1_000
                   + Double(elapsed.components.attoseconds) / 1e15
         previewAfter = Array(selected.prefix(previewLimit))
         totalCount = n
         filteredCount = selected.count
 
-        // 9. students і selected — локальні змінні,
-        //    ARC звільнить їх, щойно runSort() завершиться.
     }
 }
