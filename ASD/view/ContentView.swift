@@ -12,7 +12,7 @@ struct ContentView: View {
         NavigationStack {
             List {
                 NavigationLink("Лабораторна робота 1", destination: Lab1View())
-                NavigationLink("Лабораторна робота 2", destination: Text("Скоро"))
+                NavigationLink("Лабораторна робота 2", destination: Lab2View())
                 NavigationLink("Лабораторна робота 3", destination: Text("Скоро"))
                 NavigationLink("Лабораторна робота 4", destination: Text("Скоро"))
                 NavigationLink("Лабораторна робота 5", destination: Text("Скоро"))

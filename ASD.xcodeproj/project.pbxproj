@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		D9DE0182305D21C400DC97B5 /* ASD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = ASD.app; path = "/Users/nazardydyn/Desktop/ASD/ASD/build/Debug-iphoneos/ASD.app"; sourceTree = "<absolute>"; };
+		D961763B3064073C000C2BFB /* ASD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ASD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -33,6 +33,7 @@
 			isa = PBXGroup;
 			children = (
 				D9DE0184305D21C400DC97B5 /* ASD */,
+				D961763B3064073C000C2BFB /* ASD.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,7 +59,7 @@
 			packageProductDependencies = (
 			);
 			productName = ASD;
-			productReference = D9DE0182305D21C400DC97B5 /* ASD.app */;
+			productReference = D961763B3064073C000C2BFB /* ASD.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
