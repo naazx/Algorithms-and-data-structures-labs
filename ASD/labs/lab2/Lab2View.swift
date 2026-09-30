@@ -27,7 +27,7 @@ struct Lab2View: View {
                 Text("Лабораторна робота №2 — Швидке сортування")
                     .font(.title2).bold()
 
-                Text("Варіант 2: студенти з балом > 4 за алфавітом")
+                Text("Варіант 8: студенти з балом > 4 за алфавітом")
                     .font(.subheadline)
                     .foregroundColor(.secondary)
 
