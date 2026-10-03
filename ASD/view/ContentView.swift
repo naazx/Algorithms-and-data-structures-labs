@@ -7,26 +7,27 @@
 
 import SwiftUI
 
+enum AppTab: Hashable {
+    case labs
+    case profile
+}
+
 struct ContentView: View {
+    @State private var selection: AppTab = .labs
+
     var body: some View {
-        NavigationStack {
-            List {
-                NavigationLink("Лабораторна робота 1", destination: Lab1View())
-                NavigationLink("Лабораторна робота 2", destination: Lab2View())
-                NavigationLink("Лабораторна робота 3", destination: Lab3View())
-                NavigationLink("Лабораторна робота 4", destination: Lab4View())
-                NavigationLink("Лабораторна робота 5", destination: Lab5View())
-                NavigationLink("Лабораторна робота 6", destination: Text("Скоро"))
-                NavigationLink("Лабораторна робота 7", destination: Text("Скоро"))
-                NavigationLink("Лабораторна робота 8", destination: Text("Скоро"))
-                NavigationLink("Лабораторна робота 9", destination: Text("Скоро"))
-                NavigationLink("Лабораторна робота 10", destination: Text("Скоро"))
+        TabView(selection: $selection) {
+            Tab("Лабораторні", systemImage: "flask.fill", value: AppTab.labs) {
+                LabsView()
             }
-            .navigationTitle("Лабораторні роботи")
+            Tab("Профіль", systemImage: "person.crop.circle.fill", value: AppTab.profile) {
+                ProfileView()
+            }
         }
     }
 }
 
 #Preview {
     ContentView()
+        .environment(StatsStore())
 }
