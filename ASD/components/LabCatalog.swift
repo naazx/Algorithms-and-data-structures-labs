@@ -64,7 +64,16 @@ enum LabCatalog {
             symbol: "chart.xyaxis.line",
             tint: .purple
         ),
-    ] + (6...10).map { id in
+        LabInfo(
+            id: 6,
+            title: "Лінійні структури даних",
+            task: "Зберегти послідовність дійсних чисел у черзі, визначити її характеристики та об'єднати дві черги.",
+            variant: 7,
+            complexity: "O(n)",
+            symbol: "list.number",
+            tint: .cyan
+        ),
+    ] + (7...10).map { id in
         LabInfo(
             id: id,
             title: "Лабораторна робота №\(id)",
