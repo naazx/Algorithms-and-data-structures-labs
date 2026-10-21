@@ -73,7 +73,16 @@ enum LabCatalog {
             symbol: "list.number",
             tint: .cyan
         ),
-    ] + (7...10).map { id in
+        LabInfo(
+            id: 7,
+            title: "Бінарне дерево пошуку",
+            task: "Побудувати бінарне дерево пошуку з дійсних чисел, виконати низхідний обхід, знайти вершину з батьком і нащадками та другий за спаданням елемент.",
+            variant: 8,
+            complexity: "O(h)",
+            symbol: "point.3.connected.trianglepath.dotted",
+            tint: .mint
+        ),
+    ] + (8...10).map { id in
         LabInfo(
             id: id,
             title: "Лабораторна робота №\(id)",
