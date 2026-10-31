@@ -69,30 +69,49 @@ struct ProfileView: View {
         VStack(spacing: 10) {
             Text(initials)
                 .font(.system(size: 34, weight: .bold, design: .rounded))
-                .foregroundStyle(.white)
+                .foregroundStyle(.indigo)
                 .frame(width: 92, height: 92)
-                .background(
-                    LinearGradient(colors: [.indigo, .purple, .pink], startPoint: .topLeading, endPoint: .bottomTrailing),
-                    in: .circle
-                )
-                .shadow(color: .purple.opacity(0.3), radius: 12, y: 6)
+                .background(.white, in: .circle)
+                .overlay(Circle().strokeBorder(.white.opacity(0.5), lineWidth: 4).padding(-6))
+                .shadow(color: .black.opacity(0.15), radius: 12, y: 6)
 
             Text(name.isEmpty ? "Студент" : name)
                 .font(.title2.bold())
+                .foregroundStyle(.white)
 
             Button {
                 isEditing = true
             } label: {
-                Text(group.isEmpty ? "Додати групу" : group)
-                    .font(.subheadline)
-                    .foregroundStyle(group.isEmpty ? Color.accentColor : .secondary)
+                Label(group.isEmpty ? "Додати групу" : group,
+                      systemImage: group.isEmpty ? "plus.circle.fill" : "person.2.fill")
+                    .font(.subheadline.weight(.medium))
+                    .foregroundStyle(.white)
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 6)
+                    .background(.white.opacity(0.18), in: .capsule)
             }
             .buttonStyle(.plain)
 
-            Pill(text: "Алгоритми та структури даних", systemImage: "graduationcap.fill", tint: .indigo)
+            Label("Алгоритми та структури даних", systemImage: "graduationcap.fill")
+                .font(.caption.weight(.semibold))
+                .foregroundStyle(.white.opacity(0.85))
         }
         .frame(maxWidth: .infinity)
-        .padding(.vertical, 8)
+        .padding(.vertical, 24)
+        .background {
+            RoundedRectangle(cornerRadius: 28, style: .continuous)
+                .fill(LinearGradient(colors: [.indigo, .purple, .pink.opacity(0.85)],
+                                     startPoint: .topLeading, endPoint: .bottomTrailing))
+                .overlay(alignment: .bottomLeading) {
+                    Image(systemName: "graduationcap.fill")
+                        .font(.system(size: 120, weight: .bold))
+                        .foregroundStyle(.white.opacity(0.08))
+                        .rotationEffect(.degrees(-15))
+                        .offset(x: -24, y: 30)
+                }
+                .clipShape(.rect(cornerRadius: 28, style: .continuous))
+                .shadow(color: .purple.opacity(0.3), radius: 16, y: 8)
+        }
     }
 
     // MARK: - Progress
@@ -166,8 +185,12 @@ struct ProfileView: View {
                 .cornerRadius(6)
             }
             .chartXAxis {
-                AxisMarks(values: .stride(by: .day)) {
-                    AxisValueLabel(format: .dateTime.weekday(.abbreviated), centered: true)
+                AxisMarks(values: .stride(by: .day)) { value in
+                    AxisValueLabel(centered: true) {
+                        if let date = value.as(Date.self) {
+                            Text(date, format: .dateTime.weekday(.abbreviated).locale(Format.locale))
+                        }
+                    }
                 }
             }
             .chartYAxis {
@@ -177,6 +200,16 @@ struct ProfileView: View {
                 }
             }
             .frame(height: 160)
+            .overlay {
+                if stats.dailyActivity().allSatisfy({ $0.count == 0 }) {
+                    Text("Цього тижня ще не було запусків")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 8)
+                        .background(Color.subtleFill, in: .capsule)
+                }
+            }
         }
     }
 

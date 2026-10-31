@@ -14,6 +14,21 @@ extension Color {
     static let groupedBackground = Color(uiColor: .systemGroupedBackground)
     static let cardBackground = Color(uiColor: .secondarySystemGroupedBackground)
     static let subtleFill = Color(uiColor: .tertiarySystemFill)
+    static let hairline = Color(uiColor: .separator).opacity(0.35)
+}
+
+// MARK: - Surfaces
+
+extension View {
+    /// Standard raised surface for cards: background, hairline border and a soft shadow.
+    func cardSurface(cornerRadius: CGFloat = 22) -> some View {
+        background {
+            RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+                .fill(Color.cardBackground)
+                .strokeBorder(Color.hairline, lineWidth: 0.5)
+                .shadow(color: .black.opacity(0.04), radius: 8, y: 3)
+        }
+    }
 }
 
 // MARK: - Formatting
@@ -61,20 +76,24 @@ struct Card<Content: View>: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             if let title {
-                HStack(spacing: 8) {
+                HStack(spacing: 10) {
                     if let systemImage {
                         Image(systemName: systemImage)
+                            .font(.footnote.weight(.bold))
                             .foregroundStyle(tint)
+                            .frame(width: 28, height: 28)
+                            .background(tint.opacity(0.14), in: .rect(cornerRadius: 8, style: .continuous))
                     }
                     Text(title)
                         .font(.headline)
                 }
+                .padding(.bottom, 2)
             }
             content
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(16)
-        .background(Color.cardBackground, in: .rect(cornerRadius: 22, style: .continuous))
+        .cardSurface()
     }
 }
 
@@ -129,43 +148,51 @@ struct LabHeaderCard: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
             HStack(spacing: 14) {
-                IconTile(systemImage: lab.symbol, tint: lab.tint, size: 54)
+                Image(systemName: lab.symbol)
+                    .font(.system(size: 24, weight: .semibold))
+                    .foregroundStyle(lab.tint)
+                    .frame(width: 54, height: 54)
+                    .background(.white, in: .rect(cornerRadius: 15, style: .continuous))
+                    .shadow(color: .black.opacity(0.12), radius: 6, y: 3)
                 VStack(alignment: .leading, spacing: 2) {
                     Text("Лабораторна робота №\(lab.id)")
-                        .font(.caption.weight(.semibold))
-                        .foregroundStyle(lab.tint)
+                        .font(.caption.weight(.bold))
+                        .foregroundStyle(.white.opacity(0.8))
                         .textCase(.uppercase)
                     Text(lab.title)
                         .font(.title3.bold())
+                        .foregroundStyle(.white)
                 }
             }
 
             Text(lab.task)
                 .font(.subheadline)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(.white.opacity(0.92))
                 .fixedSize(horizontal: false, vertical: true)
 
             HStack(spacing: 8) {
                 if let variant = lab.variant {
-                    Pill(text: "Варіант \(variant)", systemImage: "number", tint: lab.tint)
+                    Pill(text: "Варіант \(variant)", systemImage: "number", tint: .white)
                 }
                 if let complexity = lab.complexity {
-                    Pill(text: complexity, systemImage: "speedometer", tint: .secondary)
+                    Pill(text: complexity, systemImage: "speedometer", tint: .white)
                 }
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(16)
+        .padding(18)
         .background {
-            RoundedRectangle(cornerRadius: 22, style: .continuous)
-                .fill(Color.cardBackground)
+            RoundedRectangle(cornerRadius: 24, style: .continuous)
+                .fill(lab.tint.gradient)
                 .overlay(alignment: .topTrailing) {
                     Image(systemName: lab.symbol)
-                        .font(.system(size: 110, weight: .bold))
-                        .foregroundStyle(lab.tint.opacity(0.07))
-                        .offset(x: 20, y: -10)
+                        .font(.system(size: 130, weight: .bold))
+                        .foregroundStyle(.white.opacity(0.12))
+                        .rotationEffect(.degrees(-12))
+                        .offset(x: 30, y: -16)
                 }
-                .clipShape(.rect(cornerRadius: 22, style: .continuous))
+                .clipShape(.rect(cornerRadius: 24, style: .continuous))
+                .shadow(color: lab.tint.opacity(0.3), radius: 14, y: 6)
         }
     }
 }
@@ -202,7 +229,7 @@ struct Pill: View {
         .foregroundStyle(tint)
         .padding(.horizontal, 10)
         .padding(.vertical, 5)
-        .background(tint.opacity(0.12), in: .capsule)
+        .background(tint.opacity(0.16), in: .capsule)
     }
 }
 
@@ -215,8 +242,10 @@ struct MetricTile: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
             Image(systemName: systemImage)
-                .font(.subheadline.weight(.semibold))
-                .foregroundStyle(tint)
+                .font(.caption.weight(.bold))
+                .foregroundStyle(.white)
+                .frame(width: 26, height: 26)
+                .background(tint.gradient, in: .circle)
             Text(value)
                 .font(.title3.bold().monospacedDigit())
                 .lineLimit(1)
@@ -229,7 +258,11 @@ struct MetricTile: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(14)
-        .background(tint.opacity(0.1), in: .rect(cornerRadius: 16, style: .continuous))
+        .background {
+            RoundedRectangle(cornerRadius: 18, style: .continuous)
+                .fill(tint.opacity(0.1))
+                .strokeBorder(tint.opacity(0.18), lineWidth: 0.5)
+        }
     }
 }
 
@@ -247,7 +280,11 @@ struct SortedBadge: View {
         .foregroundStyle(tint)
         .frame(maxWidth: .infinity)
         .padding(.vertical, 12)
-        .background(tint.opacity(0.12), in: .rect(cornerRadius: 16, style: .continuous))
+        .background {
+            RoundedRectangle(cornerRadius: 16, style: .continuous)
+                .fill(tint.opacity(0.12))
+                .strokeBorder(tint.opacity(0.25), lineWidth: 0.5)
+        }
     }
 }
 
@@ -260,7 +297,11 @@ struct ErrorBanner: View {
             .foregroundStyle(.red)
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(14)
-            .background(Color.red.opacity(0.1), in: .rect(cornerRadius: 16, style: .continuous))
+            .background {
+                RoundedRectangle(cornerRadius: 16, style: .continuous)
+                    .fill(Color.red.opacity(0.1))
+                    .strokeBorder(Color.red.opacity(0.25), lineWidth: 0.5)
+            }
             .transition(.move(edge: .top).combined(with: .opacity))
     }
 }
@@ -292,6 +333,26 @@ struct LegendItem: View {
         }
         .font(.caption)
         .foregroundStyle(.secondary)
+    }
+}
+
+struct SectionHeader: View {
+    let title: String
+    var subtitle: String? = nil
+
+    var body: some View {
+        HStack(alignment: .firstTextBaseline) {
+            Text(title)
+                .font(.title3.bold())
+            Spacer()
+            if let subtitle {
+                Text(subtitle)
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+            }
+        }
+        .padding(.horizontal, 4)
+        .padding(.top, 8)
     }
 }
 
