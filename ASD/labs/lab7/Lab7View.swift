@@ -177,7 +177,7 @@ struct Lab7View: View {
                        systemImage: "circle.grid.cross", tint: lab.tint)
             MetricTile(title: "Рівнів (висота)", value: Format.count(report.levels),
                        systemImage: "arrow.down.to.line", tint: .indigo)
-            MetricTile(title: "Другий за спаданням", value: report.secondLargest.map(Format.number) ?? "—",
+            MetricTile(title: "Другий за спаданням", value: report.secondLargest.map { Format.number($0) } ?? "—",
                        systemImage: "2.circle.fill", tint: .purple)
             MetricTile(title: report.target.map { "Значення \(Format.number($0)) у дереві" } ?? "Пошук не задано",
                        value: report.target == nil ? "—" : (report.isFound ? "Так" : "Ні"),
@@ -229,11 +229,11 @@ struct Lab7View: View {
             Card(title: "Вершина \(Format.number(target))", systemImage: "scope", tint: lab.tint) {
                 if let relatives = report.relatives {
                     CharacteristicRow(title: "Батько", systemImage: "arrow.up.circle",
-                                      value: relatives.parent.map(Format.number))
+                                      value: relatives.parent.map { Format.number($0) })
                     CharacteristicRow(title: "Лівий нащадок", systemImage: "arrow.down.left.circle",
-                                      value: relatives.left.map(Format.number))
+                                      value: relatives.left.map { Format.number($0) })
                     CharacteristicRow(title: "Правий нащадок", systemImage: "arrow.down.right.circle",
-                                      value: relatives.right.map(Format.number))
+                                      value: relatives.right.map { Format.number($0) })
                 } else {
                     Label("Такого значення в дереві немає.", systemImage: "xmark.circle.fill")
                         .font(.subheadline)

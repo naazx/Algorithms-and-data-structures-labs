@@ -50,13 +50,10 @@ class Queue {
         count -= 1
         return currentNode.value
     }
-
     
     func isEmpty() -> Bool {
         count <= 0
     }
-
-    // MARK: - Обхід без втрати вмісту
 
     func forEach(_ body: (Double) -> Void) {
         let n = count
@@ -66,15 +63,13 @@ class Queue {
             enqueue(value)
         }
     }
-
-    // MARK: - Додавання без повторів
-
+    
     func contains(_ value: Double) -> Bool {
         var found = false
         forEach { if $0 == value { found = true } }
         return found
     }
-
+    
     @discardableResult
     func enqueueUnique(_ value: Double) -> Bool {
         if contains(value) {
@@ -83,9 +78,7 @@ class Queue {
         enqueue(value)
         return true
     }
-
-    // MARK: - Характеристики
-
+    
     func element(at index: Int) -> Double? {
         guard index >= 0 && index < count else {
             return nil
@@ -100,7 +93,7 @@ class Queue {
         }
         return result
     }
-
+    
     func minMax() -> (min: Double, max: Double)? {
         guard let first = head?.value else {
             return nil
@@ -113,30 +106,29 @@ class Queue {
         }
         return (minValue, maxValue)
     }
-
+    
     func thirdFromStart() -> Double? {
         element(at: 2)
     }
-
+    
     func secondFromEnd() -> Double? {
         element(at: count - 2)
     }
-
+    
     func beforeMin() -> Double? {
         guard let extremes = minMax(), let index = position(of: extremes.min) else {
             return nil
         }
         return element(at: index - 2)
     }
-
+    
     func afterMax() -> Double? {
         guard let extremes = minMax(), let index = position(of: extremes.max) else {
             return nil
         }
         return element(at: index)
     }
-
-    // Позиція рахується з 1; nil, якщо елемента немає
+    
     func position(of target: Double) -> Int? {
         var result: Int?
         var i = 1
@@ -148,18 +140,14 @@ class Queue {
         }
         return result
     }
-
-    // MARK: - Об'єднання
-
+    
     func merged(with other: Queue) -> Queue {
         let result = Queue()
         forEach { result.enqueue($0) }
         other.forEach { result.enqueue($0) }
         return result
     }
-
-    // MARK: - Виведення
-
+    
     func description() -> String {
         if isEmpty() {
             return "(порожня черга)"

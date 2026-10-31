@@ -82,7 +82,16 @@ enum LabCatalog {
             symbol: "point.3.connected.trianglepath.dotted",
             tint: .mint
         ),
-    ] + (8...10).map { id in
+        LabInfo(
+            id: 8,
+            title: "Бінарний пошук",
+            task: "Знайти в упорядкованому масиві позицію елемента, більшого за мінімальний на 10, та порахувати кількість порівнянь.",
+            variant: 10,
+            complexity: "O(log n)",
+            symbol: "magnifyingglass",
+            tint: .blue
+        ),
+    ] + (9...10).map { id in
         LabInfo(
             id: id,
             title: "Лабораторна робота №\(id)",

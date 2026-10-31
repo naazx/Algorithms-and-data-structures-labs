@@ -133,22 +133,22 @@ struct Lab6View: View {
                 MetricTile(title: report.target.map { "Позиція числа \(Format.number($0))" } ?? "Позиція (не задано)",
                            value: report.position.map { String($0) } ?? "—",
                            systemImage: "magnifyingglass", tint: .purple)
-                MetricTile(title: "Мінімум", value: report.minValue.map(Format.number) ?? "—",
+                MetricTile(title: "Мінімум", value: report.minValue.map { Format.number($0) } ?? "—",
                            systemImage: "arrow.down.to.line", tint: .blue)
-                MetricTile(title: "Максимум", value: report.maxValue.map(Format.number) ?? "—",
+                MetricTile(title: "Максимум", value: report.maxValue.map { Format.number($0) } ?? "—",
                            systemImage: "arrow.up.to.line", tint: .orange)
             }
 
             Divider()
 
             CharacteristicRow(title: "Третій з початку", systemImage: "3.circle",
-                              value: report.third.map(Format.number))
+                              value: report.third.map { Format.number($0) })
             CharacteristicRow(title: "Другий з кінця", systemImage: "2.circle",
-                              value: report.secondFromEnd.map(Format.number))
+                              value: report.secondFromEnd.map { Format.number($0) })
             CharacteristicRow(title: "Перед мінімумом", systemImage: "arrow.left.circle",
-                              value: report.beforeMin.map(Format.number))
+                              value: report.beforeMin.map { Format.number($0) })
             CharacteristicRow(title: "Після максимуму", systemImage: "arrow.right.circle",
-                              value: report.afterMax.map(Format.number))
+                              value: report.afterMax.map { Format.number($0) })
         }
     }
 
