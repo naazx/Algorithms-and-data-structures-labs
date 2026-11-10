@@ -91,7 +91,16 @@ enum LabCatalog {
             symbol: "magnifyingglass",
             tint: .blue
         ),
-    ] + (9...10).map { id in
+        LabInfo(
+            id: 9,
+            title: "Алгоритм Кнута-Мориса-Прата",
+            task: "Поміняти місцями найдовше й найкоротше слово першого тексту та знайти в другому тексті їх об'єднання алгоритмом КМП.",
+            variant: 7,
+            complexity: "O(n + m)",
+            symbol: "text.magnifyingglass",
+            tint: .brown
+        ),
+    ] + (10...10).map { id in
         LabInfo(
             id: id,
             title: "Лабораторна робота №\(id)",

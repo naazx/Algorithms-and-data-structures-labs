@@ -312,6 +312,7 @@ private struct LabDestination: View {
         case 6: Lab6View()
         case 7: Lab7View()
         case 8: Lab8View()
+        case 9: Lab9View()
         default: ContentUnavailableView("Скоро", systemImage: "lock.fill")
         }
     }
